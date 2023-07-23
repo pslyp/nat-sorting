@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http'
+
+import { IReceived } from '../models/ireceived.model';
 
 @Component({
   selector: 'app-received-page',
@@ -23,10 +25,11 @@ import { HttpClient } from '@angular/common/http'
                 class="form-control" 
                 placeholder="yyyy-mm-dd"
                 name="dp"
+                [(ngModel)]="model"
                 ngbDatepicker
                 #d="ngbDatepicker"
                 formControlName="date" />         
-              <button type="button" class="btn bi bi-calendar3" (click)="d.toggle()"></button>
+              <button type="button" class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"></button>
             </div>
           </div>
           <div class="form-group col-4">
@@ -70,10 +73,10 @@ import { HttpClient } from '@angular/common/http'
             <label for="remark">Remark</label>
             <input id="remark" type="text" class="form-control" formControlName="remark" />
           </div>
-          <!-- <div class="form-group col-4">
+          <div class="form-group col-4" style="display: none;">
             <label for="status">Status</label>
             <input id="status" type="text" class="form-control" formControlName="status" />
-          </div> -->
+          </div>
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Add</button>
@@ -141,17 +144,20 @@ export class ReceivedComponent implements OnInit {
     customer: new FormControl('', { nonNullable: true }), 
     quantity: new FormControl(0, { nonNullable: true }), 
     priority: new FormControl('', { nonNullable: true }), 
-    remark: new FormControl('', { nonNullable: true }), 
+    remark: new FormControl('', { nonNullable: true }),
+    status: new FormControl('receive', { nonNullable: true }), 
   })
 
+  model?: NgbDateStruct
   receivedArr: Array<IReceived> = []
   totalQuantity: number = 0
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private calendar: NgbCalendar) {
    
   }
 
   ngOnInit(): void {
+    this.model = this.calendar.getToday()
     let _localDB = this.getLocalData('received-table')
 
     // console.log(_localDB.date.day)
@@ -163,8 +169,7 @@ export class ReceivedComponent implements OnInit {
   }
 
   addRow() {
-    // console.log(this.receiveForm.value)  
-
+    // console.log(this.receiveForm.value)
     this.receivedArr.push(this.receiveForm.value as IReceived)
     
     console.log(this.receivedArr)
@@ -222,23 +227,4 @@ export class ReceivedComponent implements OnInit {
     })
   }
 
-}
-
-interface IDate {
-  day?: number
-  month?: number
-  year?: number
-}
-
-interface IReceived {
-  date?: IDate
-  invoice?: string
-  partNo?: string
-  grade?: string
-  specification?: string
-  _3SSpec?: string
-  customer?: string
-  quantity?: number
-  priority?: string
-  remark?: string
 }

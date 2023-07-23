@@ -25,7 +25,7 @@ import { HttpClient } from '@angular/common/http'
                 name="dp"
                 ngbDatepicker
                 #dateFrom="ngbDatepicker" />         
-              <button type="button" class="btn bi bi-calendar3" (click)="dateFrom.toggle()"></button>
+              <button type="button" class="btn btn-outline-secondary bi bi-calendar3" (click)="dateFrom.toggle()"></button>
             </div>
           </div>
           <div class="form-group col-4">
@@ -38,7 +38,7 @@ import { HttpClient } from '@angular/common/http'
                 name="dp"
                 ngbDatepicker
                 #dateTo="ngbDatepicker" />         
-              <button type="button" class="btn bi bi-calendar3" (click)="dateTo.toggle()"></button>
+              <button type="button" class="btn btn-outline-secondary bi bi-calendar3" (click)="dateTo.toggle()"></button>
             </div>
           </div>
         </div>
