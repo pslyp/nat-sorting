@@ -6,10 +6,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModule, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http'
 
-import { IReceived } from '../models/ireceived.model';
+import { IReceive } from '../models/ireceive.model';
 
 @Component({
-  selector: 'app-received-page',
+  selector: 'app-receive-page',
   standalone: true,
   imports: [CommonModule, NgbModule, ReactiveFormsModule],
   template: ` 
@@ -80,7 +80,6 @@ import { IReceived } from '../models/ireceived.model';
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Add</button>
-        <span>{{ receiveForm.valid | json }}</span>
       </form>
       <br />
       <br />
@@ -132,7 +131,7 @@ import { IReceived } from '../models/ireceived.model';
     }
   `]
 })
-export class ReceivedComponent implements OnInit {
+export class ReceiveComponent implements OnInit {
   
   receiveForm = new FormGroup({
     date: new FormControl('', { nonNullable: true }),
@@ -145,11 +144,11 @@ export class ReceivedComponent implements OnInit {
     quantity: new FormControl(0, { nonNullable: true }), 
     priority: new FormControl('', { nonNullable: true }), 
     remark: new FormControl('', { nonNullable: true }),
-    status: new FormControl('receive', { nonNullable: true }), 
+    status: new FormControl('DISPATCH', { nonNullable: true }), 
   })
 
   model?: NgbDateStruct
-  receivedArr: Array<IReceived> = []
+  receivedArr: Array<IReceive> = []
   totalQuantity: number = 0
 
   constructor(private http: HttpClient, private calendar: NgbCalendar) {
@@ -170,7 +169,7 @@ export class ReceivedComponent implements OnInit {
 
   addRow() {
     // console.log(this.receiveForm.value)
-    this.receivedArr.push(this.receiveForm.value as IReceived)
+    this.receivedArr.push(this.receiveForm.value as IReceive)
     
     console.log(this.receivedArr)
 
@@ -193,9 +192,9 @@ export class ReceivedComponent implements OnInit {
     this.sumQuantity(this.receivedArr)
   }
 
-  sumQuantity(recArr: Array<IReceived>) {
+  sumQuantity(recArr: Array<IReceive>) {
     this.totalQuantity = 0
-    recArr.forEach((rec: IReceived) => {
+    recArr.forEach((rec: IReceive) => {
       if(Number(rec.quantity) > 0) {
         this.totalQuantity += Number(rec.quantity)
       }
@@ -221,7 +220,7 @@ export class ReceivedComponent implements OnInit {
 
   addDatabase() {
     this.receivedArr.forEach(receive => {
-      this.http.post<IReceived>('http://localhost:3000/receives', receive).subscribe(resp => {
+      this.http.post<IReceive>('http://localhost:3000/receives', receive).subscribe(resp => {
         console.log(resp)
       })
     })

@@ -14,8 +14,11 @@ import { Component, OnInit } from '@angular/core';
             <a class="nav-link" routerLinkActive="active" routerLink="/total">Total</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="/received">Received</a>
-          </li>        
+            <a class="nav-link" routerLinkActive="active" routerLink="/receive">Receive</a>
+          </li>   
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/to-assembly">To Assembly</a>
+          </li>       
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/sorting">Sorting</a>
           </li>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
-import { IReceived } from '../models/ireceived.model';
+import { IReceive } from '../models/ireceive.model';
 
 @Component({
   selector: 'app-total',
@@ -50,7 +50,7 @@ import { IReceived } from '../models/ireceived.model';
 })
 export class TotalComponent implements OnInit {
 
-  receivedArr: Array<IReceived> = []
+  receivedArr: Array<IReceive> = []
 
   constructor(private http: HttpClient) {
 
@@ -61,7 +61,7 @@ export class TotalComponent implements OnInit {
   }
 
   showTable() {
-    this.http.get<Array<IReceived>>('http://localhost:3000/receives').subscribe(data => {
+    this.http.get<Array<IReceive>>('http://localhost:3000/receives').subscribe(data => {
       this.receivedArr = data
     })   
     

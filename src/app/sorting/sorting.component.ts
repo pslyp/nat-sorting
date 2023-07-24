@@ -5,6 +5,7 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http'
+import { IReceive } from '../models/ireceive.model';
 
 @Component({
   selector: 'app-sorting',
@@ -83,14 +84,14 @@ import { HttpClient } from '@angular/common/http'
 })
 export class SortingComponent implements OnInit {
 
-  received: Array<any>
+  received: Array<IReceive> = []
 
   constructor(private http: HttpClient) {
-    this.received = []
+    
   }
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:3000/receives').subscribe(data => {
+    this.http.get<Array<IReceive>>(`http://localhost:3000/receives?status=SORTING`).subscribe(data => {
       this.received = data
       // this.received.sort
     })     
