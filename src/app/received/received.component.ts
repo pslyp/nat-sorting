@@ -127,6 +127,7 @@ import { IReceived } from '../models/ireceived.model';
           <br />
           <button type="submit" class="btn btn-primary">Add</button>
         </form>
+        <button class="btn btn-primary" (click)="addManual()">Add Manual</button>
         <br />
         <br />
         <div *ngIf="newReceiveArr.length > 0">
@@ -274,6 +275,15 @@ export class ReceivedComponent implements OnInit {
       this.http.post<IReceived>('http://localhost:3000/receives', receive).subscribe(resp => {
         console.log(resp)
       })
+    })
+  }
+
+  // For Test
+  addManual() {
+    this.http.get<any>('http://localhost:3000/singapores').subscribe(data => {
+      this.newReceiveArr = data
+      // console.log(data[0].invoice)
+      this.newTotalQuantity = this.getTotalQuantity(this.newReceiveArr)
     })
   }
 

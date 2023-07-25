@@ -117,9 +117,13 @@ import { IReceived } from '../models/ireceived.model';
         <!-- <table>
           <thead>
             <th *ngFor="let col of tableColumns">{{ col }}</th>            
+            <th *ngFor="let col of tableColumns">{{ col }}</th>            
           </thead>
           <tbody>
             <tr>
+              <td *ngFor="let col of tableColumns">
+                <input type="text" class="form-control" />
+              </td>
               <td *ngFor="let col of tableColumns">
                 <input type="text" class="form-control" />
               </td>
