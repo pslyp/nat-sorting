@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NgbModule, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 
-import { IReceive } from '../models/ireceive.model';
+import { IReceived } from '../models/ireceived.model';
 
 @Component({
   selector: 'app-assembly',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,NgbModule],
   template: `
     <div class="container">
-      <div *ngIf="state == 0">
+      <h2>Assembly</h2>
+      <br />
+      <div *ngIf="isSelect == false">
         <table class="table table-striped">
           <thead>
             <th scope="col" style="display: none;">ID</th>
@@ -30,7 +32,7 @@ import { IReceive } from '../models/ireceive.model';
           </thead>
           <tbody>
             <tr *ngFor="let receive of receivedArr; index as i">
-              <td style="display: none;">{{ receive.id }}</td>
+              <!-- <td style="display: none;">{{ receive.id }}</td> -->
               <th scope="row">{{ (i + 1) }}</th>
               <td>{{ receive.date?.year + '/' + receive.date?.month + '/' + receive.date?.day }}</td>
               <td>{{ receive.invoice }}</td>
@@ -40,64 +42,139 @@ import { IReceive } from '../models/ireceive.model';
               <td>{{ receive._3SSpec }}</td>
               <td>{{ receive.customer }}</td>
               <td>{{ receive.quantity }}</td>
-              <td><button type="button" class="btn btn-primary" (click)="onSelect(receive)">Select</button></td>
+              <td><button class="btn" (click)="selectRow(receive)">Select</button></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div *ngIf="state == 1">
+      <div *ngIf="isSelect">
         <span>{{ receive | json }}</span>
+
         <form [formGroup]="issueForm">
-          <div class="form-group">
-            <label>Invoice</label>
-            <input type="text" class="form-control" formControlName="invoice" />
+          <div class="row">
+            <div class="form-group col-4">
+              <label>Invoice (NAT)</label>
+              <input type="text" class="form-control" formControlName="invoice" />
+            </div>
+            <div class="form-group col-4">
+              <label>Order No.</label>
+              <input type="text" class="form-control" formControlName="orderNo" />
+            </div>
+            <div class="form-group col-4">
+              <label>Lot No.</label>
+              <input type="text" class="form-control" formControlName="lotNo" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-4">
+              <label>C/No.</label>
+              <input type="text" class="form-control" formControlName="CNo" />
+            </div>
+            <div class="form-group col-4">
+              <label>Q'ty</label>
+              <input type="text" class="form-control" formControlName="quantity" />
+            </div>
+            <div class="form-group col-4">
+              <label>Label Date</label>
+              <div class="input-group">
+                <input 
+                  id="labelDate" 
+                  class="form-control" 
+                  placeholder="yyyy-mm-dd"
+                  name="dp"           
+                  ngbDatepicker
+                  #labelDate="ngbDatepicker"
+                  formControlName="labelDate" />         
+                <button type="button" class="btn btn-outline-secondary bi bi-calendar3" (click)="labelDate.toggle()"></button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-4">
+              <label>Note</label>
+              <input type="text" class="form-control" formControlName="note" />
+            </div>
+            <div class="form-group col-4">
+              <label for="date">Send to Assy</label>
+              <div class="input-group">
+                <div class="input-group-text">
+                  <input type="checkbox" value="" (change)="onAssyDateCheck($event)" />
+                </div>
+                <input                               
+                  id="assyDate" 
+                  class="form-control" 
+                  placeholder="yyyy-mm-dd"
+                  name="dp" 
+                  [(ngModel)]="currDate"                            
+                  ngbDatepicker
+                  #assyDate="ngbDatepicker"
+                  formControlName="assyDate" />         
+                <button type="button" class="btn btn-outline-secondary bi bi-calendar3" (click)="assyDate.toggle()"></button>
+              </div>
+            </div>
           </div>
         </form>
-        <table>
+        <!-- <table>
           <thead>
-            <th *ngFor="let col of displayedColumns">{{ col }}</th>            
+            <th *ngFor="let col of tableColumns">{{ col }}</th>            
           </thead>
           <tbody>
             <tr>
-              <td *ngFor=""><input type="text" class="form-control" /></td>
+              <td *ngFor="let col of tableColumns">
+                <input type="text" class="form-control" />
+              </td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
       </div>
     </div>
   `,
   styles: [
   ]
 })
-export class AssemblyComponent implements OnInit {
-  displayedColumns: string[] = ["#", "Order No.", "Lot No.", "Note", "C/No.", "Q'ty", "Label Date"]
-  
-  state: number = 1
-  receive: IReceive | undefined
-  receivedArr: Array<IReceive> = []
+export class AssemblyComponent implements OnInit {  
+  isSelect: boolean = false
+  currDate?: NgbDateStruct 
+  receive: IReceived | undefined
+  receivedArr: Array<IReceived> = []
 
   issueForm = new FormGroup({
+    invoice: new FormControl(''),
     orderNo: new FormControl('', { nonNullable: true }),
     lotNo: new FormControl('', { nonNullable: true }),
-    note: new FormControl(''),
-    CNo: new FormControl(''),
-    quantity: new FormControl(''),
-    labelDate: new FormControl('')
+    note: new FormControl('', { nonNullable: true }),
+    CNo: new FormControl('', { nonNullable: true }),
+    quantity: new FormControl('', { nonNullable: true }),
+    labelDate: new FormControl('', { nonNullable: true }),
+    assyDate: new FormControl('', { nonNullable: true })
   })
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private calendar: NgbCalendar) {
     
   }
 
   ngOnInit(): void {
-    this.http.get<Array<IReceive>>('http://localhost:3000/receives?status=DISPATCH').subscribe(data => {
+    this.http.get<Array<IReceived>>('http://localhost:3000/receives?status=DISPATCH').subscribe(data => {
       this.receivedArr = data
     })
   }
 
-  onSelect(receive: IReceive): void {
-    this.state = 1
+  selectRow(receive: IReceived): void {
+    this.isSelect = true
     this.receive = receive
+
+    this.currDate = this.calendar.getToday()
+    this.issueForm.controls.assyDate.disable()
+  }
+
+  onAssyDateCheck(e: Event): void {
+    console.log(e)
+    if(this.issueForm.controls.assyDate.disabled) {
+      this.issueForm.controls.assyDate.enable()
+    }
+    else {
+      this.issueForm.controls.assyDate.disable()
+    }
   }
 
 }

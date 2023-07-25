@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +9,12 @@ import { Component, OnInit } from '@angular/core';
         <ul class="nav nav-pills">
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
-          </li>
+          </li>     
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="/total">Total</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="/receive">Receive</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="/received">Received</a>
           </li>   
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="/to-assembly">To Assembly</a>
+            <a class="nav-link" routerLinkActive="active" routerLink="/send-assembly">Send Assembly</a>
           </li>       
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/sorting">Sorting</a>

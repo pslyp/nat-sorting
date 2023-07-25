@@ -1,7 +1,6 @@
 import { IDate } from './idate.model';
 
-export interface IReceive {
-    id: number
+export interface IReceived {
     date?: IDate
     invoice?: string
     partNo?: string

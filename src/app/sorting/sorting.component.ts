@@ -5,7 +5,7 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http'
-import { IReceive } from '../models/ireceive.model';
+import { IReceived } from '../models/ireceived.model';
 
 @Component({
   selector: 'app-sorting',
@@ -63,7 +63,7 @@ import { IReceive } from '../models/ireceive.model';
         </thead>
         <tbody>
           <tr *ngFor="let rec of received; index as i">
-            <th scope="row">{{ rec.id }}</th>
+            <!-- <th scope="row">{{ rec.id }}</th> -->
             <td>{{ rec.date }}</td>
             <td>{{ rec.invoice }}</td>
             <td>{{ rec.partNo }}</td>
@@ -84,14 +84,14 @@ import { IReceive } from '../models/ireceive.model';
 })
 export class SortingComponent implements OnInit {
 
-  received: Array<IReceive> = []
+  received: Array<IReceived> = []
 
   constructor(private http: HttpClient) {
     
   }
 
   ngOnInit(): void {
-    this.http.get<Array<IReceive>>(`http://localhost:3000/receives?status=SORTING`).subscribe(data => {
+    this.http.get<Array<IReceived>>(`http://localhost:3000/receives?status=SORTING`).subscribe(data => {
       this.received = data
       // this.received.sort
     })     
