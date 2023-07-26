@@ -11,5 +11,4 @@ export interface IReceived {
     quantity?: number
     priority?: string
     remark?: string
-    status?: string
 }

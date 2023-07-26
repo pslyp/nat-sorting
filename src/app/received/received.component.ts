@@ -53,7 +53,7 @@ import { IReceived } from '../models/ireceived.model';
               <td>{{ received.quantity }}</td>
               <td>{{ received.priority }}</td>
               <td>{{ received.remark }}</td>
-              <td>{{ received.status }}</td>
+              <!-- <td>{{ received.status }}</td> -->
             </tr>
           </tbody>
         </table>
@@ -225,7 +225,7 @@ export class ReceivedComponent implements OnInit {
   }
 
   getAllReceived() {
-    this.http.get<Array<IReceived>>(`http://localhost:3000/receives`).subscribe(data => {
+    this.http.get<Array<IReceived>>(`http://localhost:3000/inventory`).subscribe(data => {
       this.receivedArr = data
       this.totalQuantity = this.getTotalQuantity(this.receivedArr)
     })
@@ -272,7 +272,7 @@ export class ReceivedComponent implements OnInit {
 
   addDatabase() {
     this.newReceiveArr.forEach(receive => {
-      this.http.post<IReceived>('http://localhost:3000/receives', receive).subscribe(resp => {
+      this.http.post<IReceived>('http://localhost:3000/inventory', receive).subscribe(resp => {
         console.log(resp)
       })
     })
@@ -280,11 +280,28 @@ export class ReceivedComponent implements OnInit {
 
   // For Test
   addManual() {
-    this.http.get<any>('http://localhost:3000/singapores').subscribe(data => {
-      this.newReceiveArr = data
-      // console.log(data[0].invoice)
-      this.newTotalQuantity = this.getTotalQuantity(this.newReceiveArr)
-    })
+    let _now = this.calendar.getToday()
+    this.http.get<Array<any>>('http://localhost:3000/singapores').subscribe(data => {
+      data.forEach(element => {
+        // console.log(element.invoice)
+        this.newReceiveArr.push({
+          date: {
+            day: _now.day,
+            month: _now.month,
+            year: _now.year
+          },
+          invoice: element.invoice,
+          partNo: element.partNo,
+          grade: element.grade,
+          specification: element.specification,
+          _3SSpec: element._3SSpec,
+          customer: element.customer,
+          quantity: element.quantity,
+          priority: element.primary,
+          remark: element.remark,
+        })
+      })
+    })    
   }
 
 }

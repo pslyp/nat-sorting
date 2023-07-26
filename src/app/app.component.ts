@@ -19,6 +19,9 @@ import { Component } from '@angular/core';
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/sorting">Sorting</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/shipment">Shipment</a>
+          </li>
         </ul>
       </div>
     </nav>

@@ -6,6 +6,7 @@ import { HomeComponent } from "./home/home.component";
 import { ReceivedComponent } from "./received/received.component";
 import { AssemblyComponent } from "./assembly/assembly.component";
 import { SortingComponent } from "./sorting/sorting.component";
+import { ShipmentComponent } from "./shipment/shipment.component";
 import { NoPageFoundComponent } from "./no-page-found/no-page-found.component";
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'received', pathMatch: 'prefix', component: ReceivedComponent },
     { path: 'send-assembly', pathMatch: 'prefix', component: AssemblyComponent },
     { path: 'sorting', pathMatch: 'prefix', component: SortingComponent },
+    { path: 'shipment', pathMatch: 'prefix', component: ShipmentComponent },
     { path: '**', component: NoPageFoundComponent }
 ];
 

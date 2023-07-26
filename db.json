@@ -1,8 +1,8 @@
 {
-  "receives": [
+  "inventory": [
     {
       "date": {
-        "day": 25,
+        "day": 26,
         "month": 7,
         "year": 2023
       },
@@ -13,32 +13,13 @@
       "_3SSpec": "JDE396-3",
       "customer": "EBM-PAP",
       "quantity": 140000,
-      "priority": 5,
       "remark": "AUTO M/C",
-      "status": "DISPATCH",
+      "status": "",
       "id": 1
     },
     {
       "date": {
-        "day": 25,
-        "month": 7,
-        "year": 2023
-      },
-      "invoice": "ABG-08151",
-      "partNo": "R-830X10ZZSD57MTMN",
-      "grade": "P5",
-      "specification": "P13LY121",
-      "_3SSpec": "JDS007B",
-      "customer": "KIMCHUN",
-      "quantity": 10000,
-      "priority": 8,
-      "remark": "AUTO M/C",
-      "status": "DISPATCH",
-      "id": 2
-    },
-    {
-      "date": {
-        "day": 25,
+        "day": 26,
         "month": 7,
         "year": 2023
       },
@@ -49,14 +30,13 @@
       "_3SSpec": "JDS003B",
       "customer": "EBM-PAP",
       "quantity": 56000,
-      "priority": 6,
       "remark": "AUTO M/C",
-      "status": "DISPATCH",
-      "id": 3
+      "status": "",
+      "id": 2
     },
     {
       "date": {
-        "day": 25,
+        "day": 26,
         "month": 7,
         "year": 2023
       },
@@ -67,14 +47,30 @@
       "_3SSpec": "JAE026A-3",
       "customer": "AVC",
       "quantity": 10000,
-      "priority": 7,
       "remark": "AUTO M/C",
-      "status": "DISPATCH",
+      "status": "",
+      "id": 3
+    },
+    {
+      "date": {
+        "day": 26,
+        "month": 7,
+        "year": 2023
+      },
+      "invoice": "ABG-08151",
+      "partNo": "R-830X10ZZSD57MTMN",
+      "grade": "P5",
+      "specification": "P13LY121",
+      "_3SSpec": "JDS007B",
+      "customer": "KIMCHUN",
+      "quantity": 10000,
+      "remark": "AUTO M/C",
+      "status": "",
       "id": 4
     },
     {
       "date": {
-        "day": 25,
+        "day": 26,
         "month": 7,
         "year": 2023
       },
@@ -85,14 +81,16 @@
       "_3SSpec": "JA014-3",
       "customer": "NIDEC",
       "quantity": 199739,
-      "priority": 0,
       "remark": "AUTO M/C",
-      "status": "DISPATCH",
+      "status": "",
       "id": 5
     }
   ],
-  "workInProcess": [
-
+  "transactions": [
+    {
+      "invoice": "ABG-08151",
+      "process": "a"
+    }
   ],
   "shipments": [
     {
@@ -110,11 +108,6 @@
   ],
   "singapores": [
     {
-      "date": {
-        "day": 25,
-        "month": 7,
-        "year": 2023
-      },
       "invoice": "ABG-08151",
       "partNo": "R-830X10ZZB1BSD57MTMN",
       "grade": "A1",
@@ -123,15 +116,9 @@
       "customer": "EBM-PAP",
       "quantity": 140000,
       "priority": 5,
-      "remark": "AUTO M/C",
-      "status": "DISPATCH"
+      "remark": "AUTO M/C"
     },
     {
-      "date": {
-        "day": 25,
-        "month": 7,
-        "year": 2023
-      },
       "invoice": "ABG-08151",
       "partNo": "R-830X10ZZB1BSD57MTMN",
       "grade": "A1",
@@ -140,15 +127,9 @@
       "customer": "EBM-PAP",
       "quantity": 56000,
       "priority": 6,
-      "remark": "AUTO M/C",
-      "status": "DISPATCH"
+      "remark": "AUTO M/C"
     },
     {
-      "date": {
-        "day": 25,
-        "month": 7,
-        "year": 2023
-      },
       "invoice": "ABG-08151",
       "partNo": "R-830X10ZZSD57MTMN",
       "grade": "P5",
@@ -157,15 +138,9 @@
       "customer": "AVC",
       "quantity": 10000,
       "priority": 7,
-      "remark": "AUTO M/C",
-      "status": "DISPATCH"
+      "remark": "AUTO M/C"
     },
     {
-      "date": {
-        "day": 25,
-        "month": 7,
-        "year": 2023
-      },
       "invoice": "ABG-08151",
       "partNo": "R-830X10ZZSD57MTMN",
       "grade": "P5",
@@ -174,15 +149,9 @@
       "customer": "KIMCHUN",
       "quantity": 10000,
       "priority": 8,
-      "remark": "AUTO M/C",
-      "status": "DISPATCH"
+      "remark": "AUTO M/C"
     },
     {
-      "date": {
-        "day": 25,
-        "month": 7,
-        "year": 2023
-      },
       "invoice": "ABG-08151",
       "partNo": "R-830X10ZZSD57MTMN",
       "grade": "P5",
@@ -191,8 +160,7 @@
       "customer": "NIDEC",
       "quantity": 199739,
       "priority": 0,
-      "remark": "AUTO M/C",
-      "status": "DISPATCH"
+      "remark": "AUTO M/C"
     }
   ]
 }
