@@ -5,7 +5,7 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http'
-import { IReceived } from '../models/ireceived.model';
+import { IReceived } from '../services/models/ireceived';
 
 @Component({
   selector: 'app-sorting',

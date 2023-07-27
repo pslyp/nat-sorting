@@ -6,7 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModule, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http'
 
-import { IReceived } from '../models/ireceived.model';
+import { IReceived } from '../services/models/ireceived';
 
 @Component({
   selector: 'app-receive-page',
@@ -228,6 +228,7 @@ export class ReceivedComponent implements OnInit {
     this.http.get<Array<IReceived>>(`http://localhost:3000/inventory`).subscribe(data => {
       this.receivedArr = data
       this.totalQuantity = this.getTotalQuantity(this.receivedArr)
+      // console.log(this.receivedArr);
     })
   }
 

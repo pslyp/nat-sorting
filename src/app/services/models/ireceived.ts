@@ -1,4 +1,4 @@
-import { IDate } from './idate.model';
+import { IDate } from './idate';
 
 export interface IReceived {
     date?: IDate

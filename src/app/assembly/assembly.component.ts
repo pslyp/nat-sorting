@@ -6,7 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModule, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 
-import { IReceived } from '../models/ireceived.model';
+import { IReceived } from '../services/models/ireceived';
 
 @Component({
   selector: 'app-assembly',

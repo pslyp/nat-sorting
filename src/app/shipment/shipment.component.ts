@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { ShipmentService } from '../services/shipment.service';
 
 @Component({
   selector: 'app-shipment',
@@ -29,20 +31,20 @@ import { CommonModule } from '@angular/common';
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>GW00013 (REF. ABG-08151)</td>
+          <tr *ngFor="let shipment of shipments">
+            <td>{{ shipment.invoice + " " + "(REF." + shipment.referenceNumber + ")" }}</td>
             <td>R-830X10ZZB1BSD57MTMN</td>
             <td>P13LY121</td>
             <td>EBM-PAP</td>
             <td class="text-end">140000</td>
             <td class="text-end">140000</td>
             <td class="text-end">0</td>
-            <td>26-Jun-23</td>
-            <td>27-Jun-23</td>
+            <td>{{ shipment.consoleDate }}</td>
+            <td>{{ shipment.pickupDate }}</td>
             <td>27-Jun-23</td>
             <td>21.10 PM</td>
             <td>27-Jun-23</td>
-            <td>23.30 PM</td>         
+            <td>23.30 PM</td>
           </tr>        
           <div>
             Total
@@ -54,15 +56,22 @@ import { CommonModule } from '@angular/common';
   styles: [
   ]
 })
-export class ShipmentComponent {
+export class ShipmentComponent implements OnInit {
 
-}
+  shipments: any = [];
 
-interface Shipment {
-  invoice?: string
-  partNo?: string
-  specification?: string
-  customer: string
-  shippingQuantity: number
+  constructor(private shipmentService: ShipmentService) {
 
+  }
+
+  ngOnInit(): void {
+    this.getAllShipments();
+  }  
+
+  getAllShipments() {
+    this.shipmentService.getAllShipments().subscribe(ret => {
+      this.shipments = ret;
+    });   
+  }
+  
 }

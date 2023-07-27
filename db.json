@@ -162,5 +162,38 @@
       "priority": 0,
       "remark": "AUTO M/C"
     }
+  ],
+  "Inventory_2": [
+    {
+      "invoice": "ABG-08151",
+      "details": {
+        "partNo": "R-830X10ZZB1BSD57MTMN",
+        "grade": "A1",
+        "specification": "P13LY121",
+        "_3SSpec": "JDE396-3",
+        "customer": "EBM-PAP",
+        "quantity": 140000,
+        "cartonBox": [
+          {
+            "boxNo": 23,
+            "orderNo": "37810-80",
+            "lotNo": "SYZ496483",
+            "quantity": 10000,
+            "labelDate": "2022-12-27",
+            "note": "-"    
+          },
+          {
+            "boxNo": 23,
+            "orderNo": "37810-80",
+            "lotNo": "SYZ496483",
+            "quantity": 10000,
+            "labelDate": "2022-12-27",
+            "note": "-"    
+          }
+        ]
+      },
+      "remark": "AUTO M/C"
+    }
   ]
+
 }
