@@ -6,10 +6,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InvoiceService {
 
+  url = 'http://localhost:3000/invoices';
+
   constructor(private http: HttpClient) { }
 
   getInvoices() {
-    let data;
-    this.http.get(`http://localhost:3000/`)
+    return this.http.get(`${this.url}`);
   }
 }
